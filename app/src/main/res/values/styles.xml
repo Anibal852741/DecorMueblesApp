@@ -1,0 +1,13 @@
+<resources>
+    <!-- Apariencia de encabezados -->
+    <style name="TextAppearance.Material3.Headline1" parent="TextAppearance.Material3.Headline1">
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textColor">@color/primary</item>
+    </style>
+
+    <!-- Apariencia de texto de cuerpo -->
+    <style name="TextAppearance.Material3.Body1" parent="TextAppearance.Material3.Body1">
+        <item name="android:fontFamily">@font/poppins_regular</item>
+        <item name="android:textColor">@color/onPrimary</item>
+    </style>
+</resources>

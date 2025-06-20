@@ -1,0 +1,27 @@
+<resources>
+    <!-- Nombre de la app -->
+    <string name="app_name">DecorMuebles</string>
+    <string name="app_logo">Logo de la aplicación</string>
+
+
+    <!-- Textos generales -->
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Contraseña</string>
+    <string name="login_button_text">Iniciar Sesión</string>
+    <string name="logout_button_text">Cerrar Sesión</string>
+    <string name="add_user">Agregar Usuario</string>
+    <string name="edit_user">Editar Usuario</string>
+    <string name="delete_user">Eliminar Usuario</string>
+    <string name="admin_title">Panel de Administración</string>
+
+    <!-- Roles de usuario -->
+    <string-array name="roles_array">
+        <item>administrador</item>
+        <item>vendedor</item>
+    </string-array>
+
+    <!-- Mensajes -->
+    <string name="delete_user_confirmation">¿Estás seguro de que deseas eliminar este usuario?</string>
+    <string name="fields_required">Por favor, completa todos los campos.</string>
+    <string name="select_user">Selecciona un usuario primero.</string>
+</resources>

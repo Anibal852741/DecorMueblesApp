@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
+    android:foreground="?attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/product_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre del Producto"
+            android:textStyle="bold"
+            android:textSize="17sp"
+            android:textColor="@color/primary" />
+
+        <TextView
+            android:id="@+id/product_quantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Stock: 0"
+            android:textSize="15sp"
+            android:textColor="@color/secondary"
+            android:layout_marginTop="6dp" />
+
+        <TextView
+            android:id="@+id/product_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Precio Unitario: S/.0.00"
+            android:textSize="15sp"
+            android:textColor="@color/secondary"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:id="@+id/product_total_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Precio Total: S/.0.00"
+            android:textSize="15sp"
+            android:textColor="@color/secondary"
+            android:layout_marginTop="4dp" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

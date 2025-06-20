@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Colores principales -->
+    <color name="onPrimary">#FFFFFF</color> <!-- Texto o elementos sobre fondo primario -->
+    <color name="onSecondary">#FFFFFF</color> <!-- Texto o elementos sobre fondo secundario -->
+
+    <!-- Otros colores ya existentes en tu archivo -->
+    <color name="background">#F5F5F5</color>
+    <color name="primary">#1F2937</color>
+    <color name="primaryVariant">#111827</color>
+    <color name="secondary">#1F2937</color>
+    <color name="textPrimary">#FFFFFF</color>
+    <color name="textPrimaryInverse">#000000</color>
+    <color name="error">#D32F2F</color>
+
+    <color name="white">#1F2937</color>
+    <color name="blue">#2196F3</color>
+    <color name="green">#4CAF50</color>
+    <color name="orange">#FF9800</color>
+    <color name="red">#F44336</color>
+    <color name="purple">#9C27B0</color>
+
+
+</resources>
