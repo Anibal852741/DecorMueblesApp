@@ -1,10 +1,12 @@
 package com.cardenas.stockifi;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,11 +41,10 @@ public class CartActivity extends AppCompatActivity {
         cartAdapter = new CartAdapter(cart, this::updateCartItem, this::removeCartItem);
         recyclerView.setAdapter(cartAdapter);
 
-
         updateTotalPrice();
 
         Button confirmButton = findViewById(R.id.confirm_button);
-        confirmButton.setOnClickListener(v -> confirmSale());
+        confirmButton.setOnClickListener(v -> showConfirmationDialog());
     }
 
     private void updateCartItem(CartItem cartItem, int newQuantity) {
@@ -66,6 +67,14 @@ public class CartActivity extends AppCompatActivity {
         totalTextView.setText("Total: S/." + String.format("%.2f", total));
     }
 
+    private void showConfirmationDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("Confirmar Venta")
+                .setMessage("¿Estás seguro de que deseas realizar esta venta?")
+                .setPositiveButton("Sí, Confirmar", (dialog, which) -> confirmSale())
+                .setNegativeButton("Cancelar", (dialog, which) -> dialog.dismiss())
+                .show();
+    }
 
     private void confirmSale() {
         for (CartItem item : cart) {
@@ -90,8 +99,5 @@ public class CartActivity extends AppCompatActivity {
         intent.putExtra("user_role", getIntent().getStringExtra("user_role"));
         startActivity(intent);
         finish();
-
-
     }
-
 }

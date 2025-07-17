@@ -1,8 +1,10 @@
 package com.cardenas.stockifi;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,7 +35,18 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
 
         holder.nameTextView.setText(product.getName());
         holder.quantityTextView.setText("Stock: " + product.getQuantity());
-        holder.priceTextView.setText("Precio: S/." + product.getPrice());
+        holder.priceTextView.setText("Precio: S/." + String.format("%.2f", product.getPrice()));
+
+        // Mostrar imagen si existe, si no usar la por defecto
+        if (product.getImageUri() != null) {
+            try {
+                holder.imageView.setImageURI(Uri.parse(product.getImageUri()));
+            } catch (Exception e) {
+                holder.imageView.setImageResource(R.drawable.placeholder_image);
+            }
+        } else {
+            holder.imageView.setImageResource(R.drawable.placeholder_image);
+        }
 
         holder.itemView.setOnClickListener(v -> onProductClickListener.onProductClick(product));
     }
@@ -45,12 +58,14 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
 
     static class StockViewHolder extends RecyclerView.ViewHolder {
         TextView nameTextView, quantityTextView, priceTextView;
+        ImageView imageView;
 
         public StockViewHolder(@NonNull View itemView) {
             super(itemView);
             nameTextView = itemView.findViewById(R.id.product_name);
             quantityTextView = itemView.findViewById(R.id.product_quantity);
             priceTextView = itemView.findViewById(R.id.product_price);
+            imageView = itemView.findViewById(R.id.product_image);
         }
     }
 

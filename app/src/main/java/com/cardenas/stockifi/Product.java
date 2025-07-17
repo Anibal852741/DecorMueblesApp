@@ -8,12 +8,14 @@ public class Product implements Parcelable {
     private String name;
     private int quantity;
     private double price;
+    private String imageUri;
 
-    public Product(int id, String name, int quantity, double price) {
+    public Product(int id, String name, int quantity, double price, String imageUri) {
         this.id = id;
         this.name = name;
         this.quantity = quantity;
         this.price = price;
+        this.imageUri = imageUri;
     }
 
     protected Product(Parcel in) {
@@ -21,6 +23,7 @@ public class Product implements Parcelable {
         name = in.readString();
         quantity = in.readInt();
         price = in.readDouble();
+        imageUri = in.readString(); // LECTURA NUEVO CAMPO
     }
 
     public static final Creator<Product> CREATOR = new Creator<Product>() {
@@ -35,38 +38,36 @@ public class Product implements Parcelable {
         }
     };
 
-    // Getters
     public int getId() {
         return id;
     }
-
     public String getName() {
         return name;
     }
-
     public int getQuantity() {
         return quantity;
     }
-
     public double getPrice() {
         return price;
     }
+    public String getImageUri() {
+        return imageUri;
+    }
 
-    // Setters
     public void setName(String name) {
         this.name = name;
     }
-
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-
     public void setPrice(double price) {
         this.price = price;
     }
-
     public void setId(int id) {
         this.id = id;
+    }
+    public void setImageUri(String imageUri) {
+        this.imageUri = imageUri;
     }
 
     @Override
@@ -80,5 +81,6 @@ public class Product implements Parcelable {
         dest.writeString(name);
         dest.writeInt(quantity);
         dest.writeDouble(price);
+        dest.writeString(imageUri); // ESCRITURA NUEVO CAMPO
     }
 }

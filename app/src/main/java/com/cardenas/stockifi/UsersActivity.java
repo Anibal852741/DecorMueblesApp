@@ -79,32 +79,25 @@ public class UsersActivity extends AppCompatActivity {
         EditText emailInput = dialogView.findViewById(R.id.user_email_input);
         EditText passwordInput = dialogView.findViewById(R.id.user_password_input);
         Spinner roleSpinner = dialogView.findViewById(R.id.user_role_spinner);
-
-        // Configurar el Spinner con los roles disponibles
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.roles_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         roleSpinner.setAdapter(adapter);
-
-        // Rellenar los campos si se está editando un usuario existente
         if (user != null) {
             nameInput.setText(user.getName());
             emailInput.setText(user.getEmail());
             passwordInput.setText(user.getPassword());
             roleSpinner.setSelection(user.getRole().equals("administrador") ? 0 : 1);
         }
-
         builder.setPositiveButton("Guardar", (dialog, which) -> {
             String name = nameInput.getText().toString().trim();
             String email = emailInput.getText().toString().trim();
             String password = passwordInput.getText().toString().trim();
             String role = roleSpinner.getSelectedItem().toString();
-
             if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
                 showToast("Todos los campos son obligatorios.");
                 return;
             }
-
             if (user != null) {
                 // Actualizar usuario existente
                 user.setName(name);
@@ -121,11 +114,9 @@ public class UsersActivity extends AppCompatActivity {
             selectedUser = null; // Desmarcar usuario seleccionado
             usersAdapter.notifyDataSetChanged();
         });
-
         builder.setNegativeButton("Cancelar", null);
         builder.show();
     }
-
     private void showConfirmationDialog(String title, String message, Runnable onConfirm) {
         new AlertDialog.Builder(this)
                 .setTitle(title)

@@ -117,13 +117,26 @@ public class DatabaseManager {
         return role;
     }
 
-    public long insertProduct(String name, int quantity, double price) {
+    public long insertProduct(String name, int quantity, double price, String imageUri) {
         ContentValues values = new ContentValues();
         values.put(DatabaseHelper.COLUMN_PRODUCT_NAME, name);
         values.put(DatabaseHelper.COLUMN_PRODUCT_QUANTITY, quantity);
         values.put(DatabaseHelper.COLUMN_PRODUCT_PRICE, price);
+        values.put(DatabaseHelper.COLUMN_PRODUCT_IMAGE_URI, imageUri);
         return database.insert(DatabaseHelper.TABLE_INVENTORY, null, values);
     }
+
+
+    public void updateProduct(int id, String name, int quantity, double price, String imageUri) {
+        ContentValues values = new ContentValues();
+        values.put(DatabaseHelper.COLUMN_PRODUCT_NAME, name);
+        values.put(DatabaseHelper.COLUMN_PRODUCT_QUANTITY, quantity);
+        values.put(DatabaseHelper.COLUMN_PRODUCT_PRICE, price);
+        values.put(DatabaseHelper.COLUMN_PRODUCT_IMAGE_URI, imageUri);
+        database.update(DatabaseHelper.TABLE_INVENTORY, values, DatabaseHelper.COLUMN_PRODUCT_ID + "=?", new String[]{String.valueOf(id)});
+    }
+
+
 
     public List<Product> getAllProducts() {
         List<Product> products = new ArrayList<>();
@@ -134,12 +147,18 @@ public class DatabaseManager {
                 String name = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_PRODUCT_NAME));
                 int quantity = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_PRODUCT_QUANTITY));
                 double price = cursor.getDouble(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_PRODUCT_PRICE));
-                products.add(new Product(id, name, quantity, price));
+                String imageUri = null;
+                int imageIndex = cursor.getColumnIndex(DatabaseHelper.COLUMN_PRODUCT_IMAGE_URI);
+                if (imageIndex >= 0) {
+                    imageUri = cursor.getString(imageIndex);
+                }
+                products.add(new Product(id, name, quantity, price, imageUri));
             } while (cursor.moveToNext());
         }
         cursor.close();
         return products;
     }
+
 
     public void updateProduct(int id, String name, int quantity, double price) {
         ContentValues values = new ContentValues();

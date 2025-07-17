@@ -1,8 +1,10 @@
 package com.cardenas.stockifi;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,7 +17,6 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.Prod
     private List<Product> productList;
     private final OnProductClickListener onProductClickListener;
 
-    // Constructor
     public InventoryAdapter(List<Product> productList, OnProductClickListener onProductClickListener) {
         this.productList = productList;
         this.onProductClickListener = onProductClickListener;
@@ -43,6 +44,13 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.Prod
         double totalPrice = productQuantity * productPrice;
         holder.totalPriceTextView.setText("Total: S/." + String.format("%.2f", totalPrice));
 
+        // Mostrar imagen del producto
+        if (product.getImageUri() != null) {
+            holder.productImageView.setImageURI(Uri.parse(product.getImageUri()));
+        } else {
+            holder.productImageView.setImageResource(R.drawable.placeholder_image); // Asegúrate de tener una imagen por defecto
+        }
+
         holder.itemView.setOnClickListener(v -> onProductClickListener.onProductClick(product));
     }
 
@@ -53,6 +61,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.Prod
 
     static class ProductViewHolder extends RecyclerView.ViewHolder {
         TextView nameTextView, quantityTextView, priceTextView, totalPriceTextView;
+        ImageView productImageView;
 
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -60,6 +69,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.Prod
             quantityTextView = itemView.findViewById(R.id.product_quantity);
             priceTextView = itemView.findViewById(R.id.product_price);
             totalPriceTextView = itemView.findViewById(R.id.product_total_price);
+            productImageView = itemView.findViewById(R.id.product_image); // NUEVO
         }
     }
 

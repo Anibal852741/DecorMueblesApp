@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "stockifi.db";
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5; // Subido a 5 para incluir image_uri
 
     // Tabla de usuarios
     public static final String TABLE_USERS = "users";
@@ -32,13 +32,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_PRODUCT_NAME = "name";
     public static final String COLUMN_PRODUCT_QUANTITY = "quantity";
     public static final String COLUMN_PRODUCT_PRICE = "price";
+    public static final String COLUMN_PRODUCT_IMAGE_URI = "image_uri"; // NUEVO
 
     private static final String CREATE_TABLE_INVENTORY =
             "CREATE TABLE " + TABLE_INVENTORY + " (" +
                     COLUMN_PRODUCT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     COLUMN_PRODUCT_NAME + " TEXT, " +
                     COLUMN_PRODUCT_QUANTITY + " INTEGER, " +
-                    COLUMN_PRODUCT_PRICE + " REAL);";
+                    COLUMN_PRODUCT_PRICE + " REAL, " +
+                    COLUMN_PRODUCT_IMAGE_URI + " TEXT);"; // NUEVO
 
     // Tabla de transacciones
     public static final String TABLE_TRANSACTIONS = "transactions";
@@ -84,6 +86,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         if (oldVersion < 4) {
             db.execSQL("ALTER TABLE " + TABLE_USERS + " ADD COLUMN " + COLUMN_ROLE + " TEXT DEFAULT 'vendedor';");
+        }
+        if (oldVersion < 5) {
+            db.execSQL("ALTER TABLE " + TABLE_INVENTORY + " ADD COLUMN " + COLUMN_PRODUCT_IMAGE_URI + " TEXT;");
         }
     }
 }

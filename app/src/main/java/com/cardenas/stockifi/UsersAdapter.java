@@ -10,16 +10,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHolder> {
-
     private List<User> users;
     private UserClickListener userClickListener;
     private int selectedPosition = -1;
-
     public UsersAdapter(List<User> users, UserClickListener userClickListener) {
         this.users = users;
         this.userClickListener = userClickListener;
     }
-
     @NonNull
     @Override
     public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -27,7 +24,6 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
                 .inflate(R.layout.user_item, parent, false);
         return new UserViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         User user = users.get(position);
@@ -44,7 +40,6 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
             userClickListener.onUserClick(user);
         });
     }
-
     @Override
     public int getItemCount() {
         return users.size();
@@ -59,7 +54,6 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
             emailTextView = itemView.findViewById(R.id.user_email);
         }
     }
-
     public interface UserClickListener {
         void onUserClick(User user);
     }

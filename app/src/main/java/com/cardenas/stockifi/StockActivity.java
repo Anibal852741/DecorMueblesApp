@@ -12,16 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StockActivity extends AppCompatActivity {
-
     private DatabaseManager databaseManager;
     private List<Product> productList;
     private StockAdapter stockAdapter;
     private List<CartItem> cart;
     private Button sellButton;
-
     private int totalItems = 0;
     private double totalPrice = 0.0;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,11 +42,8 @@ public class StockActivity extends AppCompatActivity {
             startActivity(intent);
         });
     }
-
     private void addToCart(Product product) {
         boolean productExists = false;
-
-
         for (CartItem item : cart) {
             if (item.getProduct().getId() == product.getId()) {
                 item.setQuantity(item.getQuantity() + 1);
@@ -57,20 +51,13 @@ public class StockActivity extends AppCompatActivity {
                 break;
             }
         }
-
-
         if (!productExists) {
             cart.add(new CartItem(product, 1));
         }
-
-
         totalItems++;
         totalPrice += product.getPrice();
-
-
         updateSellButtonText();
     }
-
     private void updateSellButtonText() {
         sellButton.setText("Ir al carrito (" + totalItems + " items, S/." + String.format("%.2f", totalPrice) + ")");
     }
